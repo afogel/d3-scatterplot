@@ -129,63 +129,6 @@ var searchdic = function(arri, find) {
   return true;
 }
 
-// displays the summary in tabular form
-// var tabulate = function(data_tab, columns) {
-
-//   var table = d3.select("body").append("table")
-//   .attr("class", "select3"),
-//   thead = table.append("thead"),
-//   tbody = table.append("tbody");
-
-//     // append the header row
-//     thead.append("tr")
-//     .selectAll("th")
-//     .data(columns)
-//     .enter()
-//     .append("th")
-//     .text(function(column) { return column; });
-
-//     // create a row for each object in the data
-//     var rows = tbody.selectAll("tr")
-//     .data(data_tab)
-//     .enter()
-//     .append("tr");
-
-//     // create a cell in each row for each column
-//     var cells = rows.selectAll("td")
-//     .data(function(row) {
-//       return columns.map(function(column) {
-//         return {column: column, value: row[column]};
-//       });
-//     })
-//     .enter()
-//     .append("td")
-//         .attr("style", "font-family: Courier") // sets the font style
-//         .html(function(d) { return d.value; });
-
-//     /*
-//       crossfilter dimensions and group by
-//       http://animateddata.co.uk/articles/crossfilter/
-//       */
-//       var output = "";
-//       var cf = crossfilter(data_tab);
-//       /* crossfilter currently only supports up to 32 columns) */
-//       for (var i=0;i<columns.length && i<32;i++) {
-//         var byParty = cf.dimension(function(p) {
-//           return p[columns[i]]; });
-//         output = output + "<b>" +columns[i] + "</b>" + "<br>";
-//         var groupByParty = byParty.group();
-//         groupByParty.top(5).forEach(function(p, i) {
-//           output = output + p.key + ": " + p.value + "<br>";
-//           console.log(p.key + ": " + p.value);
-//         });
-//         output = output + "<br>";
-//       }
-//     // side table
-//     document.getElementById("demo3").innerHTML = output;
-//     return table;
-//   }
-
 // create the dropdown menu
 // Coloring
 var dropDown = d3.select("body").append("select")
