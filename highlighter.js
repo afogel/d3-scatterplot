@@ -1,3 +1,7 @@
+import { plotClearer, plotDimensions } from './utilities.js';
+import { lasso }  from './lasso.js';
+
+
 // function for plotting
 export default function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMatch) {
 
@@ -6,175 +10,155 @@ export default function highlighting(val_search, val_transp, val_opacityMatch, v
   var dict1 = {};
 
     // to remove the existing svg plot if any and clear side table
-    document.getElementById("demo3").innerHTML = "";
-    document.getElementById("predicted_words").innerHTML = "";
-    document.getElementById("frequent_words").innerHTML = "";
-    d3.select("svg").remove();
-    d3.select("table").remove();
+    plotClearer.clearAll()
 
     // function zoom() {
     //  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-    //    }
+    //  }
 
     // the location of svg image will be determined
-    svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+    svg = d3.select("body")
+            .append("svg")
+            .attr("width", plotDimensions.width + plotDimensions.margin.left + plotDimensions.margin.right)
+            .attr("height", plotDimensions.height + plotDimensions.margin.top + plotDimensions.margin.bottom)
+            .append("g")
+            .attr("transform","translate(" + plotDimensions.margin.left + "," + plotDimensions.margin.top + ")");
 
-    /* https://github.com/skokenes/D3-Lasso-Plugin
-    plugin also handles selected and possible settings */
-    // Lasso starts
-    var lasso_start = function() {
-      d3.select("table").remove();
-      document.getElementById("demo3").innerHTML = "";
-      lasso.items()
-            .attr("r",3.5) // reset size
-            .style("fill",null) // clear all of the fills (greys out)
-            .classed({"not_possible":true,"selected":false}); // style as not possible
-          };
+    
 
-          var lasso_draw = function() {
-        // Style the possible dots
-        lasso.items().filter(function(d) {return d.possible===true})
-        .classed({"not_possible":false,"possible":true});
+    // var lasso_draw = function() {
+        
+    //   };
 
-        // Style the not possible dot
-        lasso.items().filter(function(d) {return d.possible===false})
-        .classed({"not_possible":true,"possible":false})
-        .style("stroke", "#000");
-      };
+    //   var lasso_end = function() {
+    //     // Reset the color of all dots
+    //     lasso.items()
+    //     .style("fill", function(d) { return color(d[color_column]); });
 
-      var lasso_end = function() {
-        // Reset the color of all dots
-        lasso.items()
-        .style("fill", function(d) { return color(d[color_column]); });
+    //     // Style the selected dots
+    //     lasso.items().filter(function(d) {return d.selected===true})
+    //     .classed({"not_possible":false,"possible":false})
+    //     .attr("r",6.5);
 
-        // Style the selected dots
-        lasso.items().filter(function(d) {return d.selected===true})
-        .classed({"not_possible":false,"possible":false})
-        .attr("r",6.5);
+    //     // get values for table -> array inside a list
+    //     var zsx = lasso.items().filter(function(d) {return d.selected===true});
+    //     x_values = [];
+    //     y_values = [];
+    //     // adjust the x and y values
+    //     for (var i=0; i<zsx[0].length; i++) {
+    //       x_values.push(((((zsx[0][i].getBBox().x+6.5) * (x_max - x_min))/width + x_min )));
+    //       y_values.push(((((zsx[0][i].getBBox().y+6.5) * (y_min - y_max))/height + y_max)));
+    //     }
+    //     var selected_data=[], selected_data_indices=[];
+    //     // Compare every selected point to all points (tempX)
+    //     // in order to match coordinates with actual data
+    //     for (var ii=0;ii<x_values.length;ii++) {
+    //       console.log("lasso_end gathering selected data");
+    //       console.log(temp1.length);
+    //       for (var jj=0;jj<temp1.length;jj++) {
+    //         x_values[ii] = +(x_values[ii].toFixed(3));
+    //         y_values[ii] = +(y_values[ii].toFixed(5));
+    //         if ( (x_values[ii] === +(temp1[jj].toFixed(3))) && (y_values[ii] === +(temp2[jj].toFixed(5))) ) {
+    //           all_values = {};
+    //           for (var k=1;k<categories.length;k++) {
+    //             all_values[categories[k]] = (dict1[categories[k]][jj]);
+    //           }
+    //           if(searchdic(selected_data,all_values)==true){
+    //             selected_data.push(all_values);
+    //             selected_data_indices.push(jj);
+    //             break;
+    //           }
+    //         }
+    //       }
+    //     }
+    //     // render the table for the points selected by lasso
+    //     if (selected_data.length > 0) {
+    //       console.log("Rendering table...");
+    //       console.log(selected_data);
+    //       console.log(columns);
+    //       console.log(x_values);
+    //       var peopleTable = tabulate(selected_data, columns, x_values);
+    //       if ("semantic_model" in dicts && dicts["semantic_model"] == "true") {
+    //         console.log("Predicting words...");
+    //         classify(selected_data_indices, vectorspace_2darray, weights_2darray, biases_1darray, vocab_1darray);
+    //         benchmark(selected_data_indices, bow_2darray, vocab_1darray);
+    //       }
+    //     }
 
-        // get values for table -> array inside a list
-        var zsx = lasso.items().filter(function(d) {return d.selected===true});
-        x_values = [];
-        y_values = [];
-        // adjust the x and y values
-        for (var i=0; i<zsx[0].length; i++) {
-          x_values.push(((((zsx[0][i].getBBox().x+6.5) * (x_max - x_min))/width + x_min )));
-          y_values.push(((((zsx[0][i].getBBox().y+6.5) * (y_min - y_max))/height + y_max)));
-        }
-        var selected_data=[], selected_data_indices=[];
-        // Compare every selected point to all points (tempX)
-        // in order to match coordinates with actual data
-        for (var ii=0;ii<x_values.length;ii++) {
-          console.log("lasso_end gathering selected data");
-          console.log(temp1.length);
-          for (var jj=0;jj<temp1.length;jj++) {
-            x_values[ii] = +(x_values[ii].toFixed(3));
-            y_values[ii] = +(y_values[ii].toFixed(5));
-            if ( (x_values[ii] === +(temp1[jj].toFixed(3))) && (y_values[ii] === +(temp2[jj].toFixed(5))) ) {
-              all_values = {};
-              for (var k=1;k<categories.length;k++) {
-                all_values[categories[k]] = (dict1[categories[k]][jj]);
-              }
-              if(searchdic(selected_data,all_values)==true){
-                selected_data.push(all_values);
-                selected_data_indices.push(jj);
-                break;
-              }
-            }
-          }
-        }
-        // render the table for the points selected by lasso
-        if (selected_data.length > 0) {
-          console.log("Rendering table...");
-          console.log(selected_data);
-          console.log(columns);
-          console.log(x_values);
-          var peopleTable = tabulate(selected_data, columns, x_values);
-          if ("semantic_model" in dicts && dicts["semantic_model"] == "true") {
-            console.log("Predicting words...");
-            classify(selected_data_indices, vectorspace_2darray, weights_2darray, biases_1darray, vocab_1darray);
-            benchmark(selected_data_indices, bow_2darray, vocab_1darray);
-          }
-        }
-
-        // Reset the style of the not selected dots (we made them 0.5 smaller)
-        lasso.items().filter(function(d) {return d.selected===false})
-        .classed({"not_possible":false,"possible":false})
-        .attr("r",3)
-        .style("stroke", "#000");
-      };
+    //     // Reset the style of the not selected dots (we made them 0.5 smaller)
+    //     lasso.items().filter(function(d) {return d.selected===false})
+    //     .classed({"not_possible":false,"possible":false})
+    //     .attr("r",3)
+    //     .style("stroke", "#000");
+    //   };
 
     // Create the area where the lasso event can be triggered
-    var lasso_area = svg.append("rect")
-    .attr("width",width)
-    .attr("height",height)
-    .style("opacity",0);
+    // var lasso_area = svg.append("rect")
+    // .attr("width",width)
+    // .attr("height",height)
+    // .style("opacity",0);
 
-    // Define the lasso
-    var lasso = d3.lasso()
-        .closePathDistance(75) // max distance for the lasso loop to be closed
-        .closePathSelect(true) // can items be selected by closing the path?
-        .hoverSelect(true) // can items by selected by hovering over them?
-        .area(lasso_area) // area where the lasso can be started
-        .on("start",lasso_start) // lasso start function
-        .on("draw",lasso_draw) // lasso draw function
-        .on("end",lasso_end); // lasso end function
+    // // Define the lasso
+    // var lasso = d3.lasso()
+    //     .closePathDistance(75) // max distance for the lasso loop to be closed
+    //     .closePathSelect(true) // can items be selected by closing the path?
+    //     .hoverSelect(true) // can items by selected by hovering over them?
+    //     .area(lasso_area) // area where the lasso can be started
+    //     .on("start",lasso.start) // lasso start function
+    //     .on("draw",lasso.draw) // lasso draw function
+    //     .on("end",lasso.end); // lasso end function
 
     // Init the lasso object on the svg:g that contains the dots
-    svg.call(lasso);
+    svg.call(lasso.init(svg));
 
-    var classify = function(indices, vs_source, weights_source, biases_source, vocab_source) {
-      var sum_vectors = vs_source[indices[0]];
-      for (i=1; i < indices.length; i++) {
-        sum_vectors = math.add(sum_vectors, vs_source[indices[i]]);
-      }
-      var avg_vector = sum_vectors.map(function(x) { return x / indices.length; });
-      var mul = math.multiply(avg_vector, weights_source);
-      var add = math.add(mul, biases_source);
-        // get indices of 10 greatest elements
-        var topIndices = findIndicesOfMax(add, 10);
-        console.log("Top predicted vocab words:");
-        var strbuilder = "Predicted words:";
-        for (i=0; i<10; i++) {
-          console.log((i+1) + ": " + vocab_source[topIndices[i]]);
-          strbuilder += " " + vocab_source[topIndices[i]] + ",";
-        }
-        document.getElementById("predicted_words").innerHTML = strbuilder.slice(0, -1);
-      }
-    var benchmark = function(indices, bow_source, vocab_source) { // may need to adjust
-      var num_indices = indices.length;
-      var vocab_freq = bow_source[indices[0]];
-      for (i=1; i < num_indices; i++) {
-        vocab_freq = math.add(vocab_freq, bow_source[indices[i]]);
-      }
-        // get indices of 10 greatest elements
-        var topIndices = findIndicesOfMax(vocab_freq, 10);
-        console.log("Most frequent words:");
-        var strbuilder = "Most frequent words:";
-        for (i=0; i<10; i++) {
-          console.log((i+1) + ": " + vocab_source[topIndices[i]]);
-          strbuilder += " " + vocab_source[topIndices[i]] + ",";
-        }
-        document.getElementById("frequent_words").innerHTML = strbuilder.slice(0, -1);
-      }
+    // var classify = function(indices, vs_source, weights_source, biases_source, vocab_source) {
+    //   var sum_vectors = vs_source[indices[0]];
+    //   for (i=1; i < indices.length; i++) {
+    //     sum_vectors = math.add(sum_vectors, vs_source[indices[i]]);
+    //   }
+    //   var avg_vector = sum_vectors.map(function(x) { return x / indices.length; });
+    //   var mul = math.multiply(avg_vector, weights_source);
+    //   var add = math.add(mul, biases_source);
+    //     // get indices of 10 greatest elements
+    //     var topIndices = findIndicesOfMax(add, 10);
+    //     console.log("Top predicted vocab words:");
+    //     var strbuilder = "Predicted words:";
+    //     for (i=0; i<10; i++) {
+    //       console.log((i+1) + ": " + vocab_source[topIndices[i]]);
+    //       strbuilder += " " + vocab_source[topIndices[i]] + ",";
+    //     }
+    //     document.getElementById("predicted_words").innerHTML = strbuilder.slice(0, -1);
+    //   }
+    // var benchmark = function(indices, bow_source, vocab_source) { // may need to adjust
+    //   var num_indices = indices.length;
+    //   var vocab_freq = bow_source[indices[0]];
+    //   for (i=1; i < num_indices; i++) {
+    //     vocab_freq = math.add(vocab_freq, bow_source[indices[i]]);
+    //   }
+    //     // get indices of 10 greatest elements
+    //     var topIndices = findIndicesOfMax(vocab_freq, 10);
+    //     console.log("Most frequent words:");
+    //     var strbuilder = "Most frequent words:";
+    //     for (i=0; i<10; i++) {
+    //       console.log((i+1) + ": " + vocab_source[topIndices[i]]);
+    //       strbuilder += " " + vocab_source[topIndices[i]] + ",";
+    //     }
+    //     document.getElementById("frequent_words").innerHTML = strbuilder.slice(0, -1);
+    //   }
 
-    // Utility function used for predicting words in semantic setting
-    // Source: https://stackoverflow.com/a/11792230/7100714
-    function findIndicesOfMax(inp, count) {
-      var outp = new Array();
-      for (var i = 0; i < inp.length; i++) {
-        outp.push(i);
-        if (outp.length > count) {
-          outp.sort(function(a, b) { return inp[b] - inp[a]; });
-          outp.pop();
-        }
-      }
-      return outp;
-    }
+    // // Utility function used for predicting words in semantic setting
+    // // Source: https://stackoverflow.com/a/11792230/7100714
+    // function findIndicesOfMax(inp, count) {
+    //   var outp = new Array();
+    //   for (var i = 0; i < inp.length; i++) {
+    //     outp.push(i);
+    //     if (outp.length > count) {
+    //       outp.sort(function(a, b) { return inp[b] - inp[a]; });
+    //       outp.pop();
+    //     }
+    //   }
+    //   return outp;
+    // }
 
     console.log('Loading main data, again') // load data
     d3.tsv(dataset, function(error, data) {
@@ -327,25 +311,24 @@ export default function highlighting(val_search, val_transp, val_opacityMatch, v
 
           var transpar = function(d) {
             if (val_transp !== "" && typeof d != 'undefined') {
-                // if point's transp column value is equal to the value specified, return val_opacityMatch, else val_opacityNoMatch
-                var match;
-                if (document.getElementById('cbox6').checked) {
-                    // console.log("Using exact match");
-                    match = d[transparent_column] == val_transp;
-                  } else {
-                    match = d[transparent_column] && (d[transparent_column].toLowerCase().indexOf(val_transp.toLowerCase()) > -1);
-                  }
+              // if point's transp column value is equal to the value specified, return val_opacityMatch, else val_opacityNoMatch
+              var match;
+              if (document.getElementById('cbox6').checked) {
+                // console.log("Using exact match");
+                match = d[transparent_column] == val_transp;
+              } else {
+                match = d[transparent_column] && (d[transparent_column].toLowerCase().indexOf(val_transp.toLowerCase()) > -1);
+              }
 
-                  if (match){
-                    return parseFloat(val_opacityMatch);
-                  } else{
-                    return parseFloat(val_opacityNoMatch);
-                  }
-                }
-                else {
-                  return 1;
-                }
-              };
+              if (match){
+                return parseFloat(val_opacityMatch);
+              } else {
+                return parseFloat(val_opacityNoMatch);
+              }
+            } else {
+                return 1;
+            }
+          };
 
         // searching according to the substring given and searching column
         var searchFunc = function(d) {

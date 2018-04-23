@@ -1,9 +1,6 @@
 import highlighting  from './highlighter.js';
-// The location of svg plot is determined by the following margins
-var margin = {top: 90, right: 40, bottom: 40, left: 40},
-width = 700 - margin.left - margin.right,
-height = 750 - margin.top - margin.bottom,
-dataset;
+import { plotDimensions } from './utilities.js';
+var dataset;
 
 // This step is performed to parse the url to identify the dataset and the default coloring column
 var query = window.location.search.substring(1);
@@ -42,11 +39,11 @@ if ("semantic_model" in dicts && dicts["semantic_model"] == "true") {
   d3.tsv(vectorfile, function(text){
     vectorspace_2darray = text.map( Object.values );
     vectorspace_2darray = vectorspace_2darray.map(function(arr) {
-            // username column ends up last in the dictionary, due to alphanumeric sort
-            return arr.slice(0,-1).map(function(elem) {
-              return parseFloat(elem);
-            });
-          });
+      // username column ends up last in the dictionary, due to alphanumeric sort
+      return arr.slice(0,-1).map(function(elem) {
+        return parseFloat(elem);
+      });
+    });
   });
   console.log("Reading " + weightsfile);
   d3.tsv(weightsfile, function(text){
@@ -78,13 +75,13 @@ if ("semantic_model" in dicts && dicts["semantic_model"] == "true") {
 
 // setup x
 var xValue = function(d) { return d.x;}, // data -> value
-    xScale = d3.scale.linear().range([0, width]), // value -> display
+    xScale = d3.scale.linear().range([0, plotDimensions.width]), // value -> display
     xMap = function(d) {return xScale(xValue(d));}, // data -> display
     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
 // setup y
 var yValue = function(d) { return d["y"];}, // data -> value
-    yScale = d3.scale.linear().range([height, 0]), // value -> display
+    yScale = d3.scale.linear().range([plotDimensions.height, 0]), // value -> display
     yMap = function(d) { return yScale(yValue(d));}, // data -> display
     yAxis = d3.svg.axis().scale(yScale).orient("left");
 
@@ -133,61 +130,61 @@ var searchdic = function(arri, find) {
 }
 
 // displays the summary in tabular form
-var tabulate = function(data_tab, columns) {
+// var tabulate = function(data_tab, columns) {
 
-  var table = d3.select("body").append("table")
-  .attr("class", "select3"),
-  thead = table.append("thead"),
-  tbody = table.append("tbody");
+//   var table = d3.select("body").append("table")
+//   .attr("class", "select3"),
+//   thead = table.append("thead"),
+//   tbody = table.append("tbody");
 
-    // append the header row
-    thead.append("tr")
-    .selectAll("th")
-    .data(columns)
-    .enter()
-    .append("th")
-    .text(function(column) { return column; });
+//     // append the header row
+//     thead.append("tr")
+//     .selectAll("th")
+//     .data(columns)
+//     .enter()
+//     .append("th")
+//     .text(function(column) { return column; });
 
-    // create a row for each object in the data
-    var rows = tbody.selectAll("tr")
-    .data(data_tab)
-    .enter()
-    .append("tr");
+//     // create a row for each object in the data
+//     var rows = tbody.selectAll("tr")
+//     .data(data_tab)
+//     .enter()
+//     .append("tr");
 
-    // create a cell in each row for each column
-    var cells = rows.selectAll("td")
-    .data(function(row) {
-      return columns.map(function(column) {
-        return {column: column, value: row[column]};
-      });
-    })
-    .enter()
-    .append("td")
-        .attr("style", "font-family: Courier") // sets the font style
-        .html(function(d) { return d.value; });
+//     // create a cell in each row for each column
+//     var cells = rows.selectAll("td")
+//     .data(function(row) {
+//       return columns.map(function(column) {
+//         return {column: column, value: row[column]};
+//       });
+//     })
+//     .enter()
+//     .append("td")
+//         .attr("style", "font-family: Courier") // sets the font style
+//         .html(function(d) { return d.value; });
 
-    /*
-      crossfilter dimensions and group by
-      http://animateddata.co.uk/articles/crossfilter/
-      */
-      var output = "";
-      var cf = crossfilter(data_tab);
-      /* crossfilter currently only supports up to 32 columns) */
-      for (var i=0;i<columns.length && i<32;i++) {
-        var byParty = cf.dimension(function(p) {
-          return p[columns[i]]; });
-        output = output + "<b>" +columns[i] + "</b>" + "<br>";
-        var groupByParty = byParty.group();
-        groupByParty.top(5).forEach(function(p, i) {
-          output = output + p.key + ": " + p.value + "<br>";
-          console.log(p.key + ": " + p.value);
-        });
-        output = output + "<br>";
-      }
-    // side table
-    document.getElementById("demo3").innerHTML = output;
-    return table;
-  }
+//     /*
+//       crossfilter dimensions and group by
+//       http://animateddata.co.uk/articles/crossfilter/
+//       */
+//       var output = "";
+//       var cf = crossfilter(data_tab);
+//       /* crossfilter currently only supports up to 32 columns) */
+//       for (var i=0;i<columns.length && i<32;i++) {
+//         var byParty = cf.dimension(function(p) {
+//           return p[columns[i]]; });
+//         output = output + "<b>" +columns[i] + "</b>" + "<br>";
+//         var groupByParty = byParty.group();
+//         groupByParty.top(5).forEach(function(p, i) {
+//           output = output + p.key + ": " + p.value + "<br>";
+//           console.log(p.key + ": " + p.value);
+//         });
+//         output = output + "<br>";
+//       }
+//     // side table
+//     document.getElementById("demo3").innerHTML = output;
+//     return table;
+//   }
 
 // create the dropdown menu
 // Coloring
@@ -253,23 +250,23 @@ console.log('Loading main data')
 d3.tsv(dataset, function(data) {
   console.log(data[0]);
   temp = Object.keys(data[0]);
-    // remove x and y
-    temp.splice(temp.indexOf('x'), 1);
-    temp.splice(temp.indexOf('y'), 1);
+  // remove x and y
+  temp.splice(temp.indexOf('x'), 1);
+  temp.splice(temp.indexOf('y'), 1);
 
-    for(var i=0;i<temp.length;i++)
-      if (temp[i] != category_search) {
-        category_search_data.push(temp[i]);
-      }
+  for (var i=0;i<temp.length;i++)
+    if (temp[i] != category_search) {
+      category_search_data.push(temp[i]);
+    }
 
-      for(var i=0;i<temp.length;i++) {
-        // color_column already pushed
-        if (temp[i] != color_column) {
-          categories.push(temp[i]);
-          categories_copy_color.push(temp[i]);
-        }
-        columns.push(temp[i]);
+    for(var i=0;i<temp.length;i++) {
+      // color_column already pushed
+      if (temp[i] != color_column) {
+        categories.push(temp[i]);
+        categories_copy_color.push(temp[i]);
       }
+      columns.push(temp[i]);
+    }
     // check whether the coloring column is provided in the url or not
     // ?? is this necessary? color_column is already defined with the same procedure outside the function
     if ("color" in dicts) {
@@ -334,7 +331,7 @@ dropDown4.on("change", plotting5);
 if ("q" in dicts) {
   highlighting(dicts["q"], "", "");
 } else {
-  highlighting("", "", "");
+  // highlighting("", "", "");
 }
 
 // the functions to call when the value of dropdown menu is changes
