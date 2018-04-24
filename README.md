@@ -32,3 +32,8 @@ Began to incorporate webpack in order to compile modules and maintain better cod
 Installation can be done by running `npm install -g webpack` (currently running v. 4.6.0). 
 
 To start the webpack bundler service, run `npm start`. This command will watch the repo and update the `bundle.js` file to match saved changes.
+
+#### TODO/Nice to haves
+- we should add the `math.min.js` file to the vendor folder, otherwise, we should just remove the reference in our `index.html`.
+- it would be nice to have example files for vocab, weights, biases, and bow data so that we can test the code paths for those; currently, it's not possible to know whether they work or not using the data in the repo
+- 
