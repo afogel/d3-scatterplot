@@ -1,4 +1,4 @@
-import { margin, width, height, plotClearer } from './modules/utilities.js';
+import { margin, width, height, plotClearer, searchdic } from './modules/utilities.js';
 import { classify, benchmark, tabulate } from './modules/table_creator.js';
 
 console.log(margin, width, height)
@@ -117,18 +117,6 @@ var d3_category20_shuffled = [
 var cValue = function(d) {return d[color_column];},
 cValue2 = function(d) {return Math.log(parseFloat(d[color_column]));},
 color = d3.scale.ordinal().range(d3_category20_shuffled);
-
-// used to search a particular substring in the list of requested feature column
-// used to determine whether we should add find to arri, hence the t/f -> f/t
-var searchdic = function(arri, find) {
-  for(var i=0;i<arri.length;i++) {
-    if(JSON.stringify(find) === JSON.stringify(arri[i])){
-      return false;
-    }
-  }
-  return true;
-}
-
 
 
 // create the dropdown menu
