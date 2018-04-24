@@ -269,11 +269,11 @@ function plotting2(){
 function plotting(){
   color_column = d3.event.target.value;
   cValue = function(d) { return d[color_column];};
-  val_search = document.getElementById("searchText").value;
+  
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // function to call for change event
@@ -281,11 +281,10 @@ function plotting(){
 function plotting5(){
   shaping_column = d3.event.target.value;
   cValue = function(d) { return d[color_column];};
-  val_search = document.getElementById("searchText").value;
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 var zoomed = 0;
@@ -296,11 +295,10 @@ var needDrawCircle = false;
 // it will be executed when search button is pressed and points that matches the searched string will be highlighted
 function handleClick(event) {
   console.log(document.getElementById("searchText").value);
-  val_search = document.getElementById("searchText").value;
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck(event) {
@@ -313,11 +311,10 @@ function handleCheck(event) {
 // it will be executed when Transparent button is pressed and points that satisfies the condition will be highlighted
 function handleClick1(event) {
   console.log(document.getElementById("transpText").value);
-  val_search = document.getElementById("searchText").value;
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck1(event) {
@@ -345,11 +342,10 @@ function handleClick2(event){
 // it will be executed when spectrum/log is checked
 // ?? Can we collapse handleClick1,3,4?
 function handleClick3(event) {
-  val_search = document.getElementById("searchText").value;
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // it will be executed when (?? draw and) zoom button is pressed and the plot will zoomed out according to the points obtained by mouse click event
@@ -357,12 +353,11 @@ function handleClick4(){
   if (!document.getElementById('cbox3').checked) {
       document.getElementById("zoomxy").value = ""; // clear the textbox
     }
-    val_search = document.getElementById("searchText").value;
     val_transp = document.getElementById("transpText").value;
     val_opacityMatch = document.getElementById("opacityMatch").value;
     val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
     needZoom = true;
-    highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+    highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch);
   }
 
 
