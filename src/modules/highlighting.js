@@ -1,6 +1,6 @@
 import { margin, width, height, d3_category20_shuffled } from './constants.js';
 import { classify, benchmark, tabulate } from './table_creator.js';
-import { lassoStart, lassoDraw } from './lasso.js'
+// import { lassoStart, lassoDraw } from './lasso.js'
 import { plotClearer, 
          searchdic, 
          getParameterByName,
@@ -35,6 +35,29 @@ export function highlighting(dataset, categories, shaping_column, category_searc
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+  function lassoStart () {
+    plotClearer.clearTable();
+    console.log(lasso)
+    lasso.items()
+         .attr("r",3.5) // reset size
+         .style("fill",null) // clear all of the fills (greys out)
+         .classed({"not_possible":true,"selected":false}); // style as not possible
+  }
+
+  function lassoDraw() {
+    // Style the possible dots
+    lasso.items()
+         .filter((dot) => ( dot.possible === true ))
+         .classed({ "not_possible": false, "possible": true });
+
+    // Style the not possible dot
+    lasso.items()
+         .filter((d) => ( d.possible === false ))
+         .classed({"not_possible":true,"possible":false})
+         .style("stroke", "#000");
+  };
+
 
     var lasso_end = function() {
       // Reset the color of all dots
