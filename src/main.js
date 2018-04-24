@@ -75,15 +75,6 @@ if ("semantic_model" in dicts && dicts["semantic_model"] == "true") {
   });
 }
 
-// add the tooltip area to the webpage
-var tooltip = d3.select("body").append("div")
-.attr("class", "tooltip")
-.style("opacity", 0);
-
-var tooltip1 = d3.select("body").append("div")
-.attr("class", "tooltip1")
-.style("opacity", 0);
-
 // setup fill color
 var color_column;
 
