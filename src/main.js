@@ -345,8 +345,6 @@ function handleClick4(){
   }
 
 
-
-
 function linspace(start, end, n) {
   var out = [];
   var delta = (end - start) / (n - 1);
