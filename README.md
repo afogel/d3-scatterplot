@@ -28,5 +28,7 @@ Note: semantic_model.py automatically generates .txt files for you, as files nee
 
 ## Dev notes
 Began to incorporate webpack in order to compile modules and maintain better code encapsulation for readability and maintainability. 
+
 Installation can be done by running `npm install -g webpack` (currently running v. 4.6.0). 
+
 To start the webpack bundler service, run `npm start`. This command will watch the repo and update the `bundle.js` file to match saved changes.
