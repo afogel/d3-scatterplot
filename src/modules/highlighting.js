@@ -1,10 +1,21 @@
 import { margin, width, height, d3_category20_shuffled } from './constants.js';
-import { plotClearer, searchdic, getParameterByName } from './utilities.js';
 import { classify, benchmark, tabulate } from './table_creator.js';
 import { lassoStart, lassoDraw } from './lasso.js'
+import { plotClearer, 
+         searchdic, 
+         getParameterByName,
+         xValue,
+         yValue,
+         xScale,
+         yScale,
+         xMap,
+         yMap,
+         xAxis,
+         yAxis 
+       } from './utilities.js';
 
 // function for plotting
-export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch) {
+export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch) {
 
   var svg;
   var temp1 = [], temp2 = [], temp3 = [];
