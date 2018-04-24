@@ -1,6 +1,7 @@
 import { margin, width, height, d3_category20_shuffled } from './constants.js';
 import { classify, benchmark, tabulate } from './table_creator.js';
 import { tooltip, tooltip1 } from './tooltips.js'
+import { cValue } from './color_helpers.js'
 // import { lassoStart, lassoDraw } from './lasso.js'
 import { plotClearer, 
          searchdic, 
@@ -17,7 +18,7 @@ import { plotClearer,
        } from './utilities.js';
 
 // function for plotting
-export function highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch) {
+export function highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch) {
   let x_max, x_min, y_max, y_min, svg;
   let coordinatesx = [];
   let coordinatesy = [];
@@ -93,7 +94,7 @@ export function highlighting(dataset, categories, shaping_column, category_searc
           x_values[ii] = +(x_values[ii].toFixed(3));
           y_values[ii] = +(y_values[ii].toFixed(5));
           if ( (x_values[ii] === +(temp1[jj].toFixed(3))) && (y_values[ii] === +(temp2[jj].toFixed(5))) ) {
-            all_values = {};
+            let all_values = {};
             for (var k=1;k<categories.length;k++) {
               all_values[categories[k]] = (dict1[categories[k]][jj]);
             }

@@ -88,8 +88,8 @@ var tooltip1 = d3.select("body").append("div")
 var color_column;
 
 // coloring will be done according to the values determined by cValue
-var cValue = function(d) {return d[color_column];},
-cValue2 = function(d) {return Math.log(parseFloat(d[color_column]));},
+// var cValue = function(d) {return d[color_column];},
+var cValue2 = function(d) {return Math.log(parseFloat(d[color_column]));},
 color = d3.scale.ordinal().range(d3_category20_shuffled);
 
 
@@ -235,9 +235,9 @@ dropDown3.on("change", plotting4);
 dropDown4.on("change", plotting5);
 
 if ("q" in dicts) {
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, dicts["q"], "", "");
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, dicts["q"], "", "");
 } else {
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, "", "", "");
 }
 
 // the functions to call when the value of dropdown menu is changes
@@ -261,7 +261,7 @@ function plotting(){
   cValue = function(d) { return d[color_column];};
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
 }
 
 // function to call for change event
@@ -271,7 +271,7 @@ function plotting5(){
   cValue = function(d) { return d[color_column];};
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
 }
 
 var zoomed = 0;
@@ -284,7 +284,7 @@ function handleClick(event) {
   console.log(document.getElementById("searchText").value);
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck(event) {
@@ -299,7 +299,7 @@ function handleClick1(event) {
   console.log(document.getElementById("transpText").value);
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck1(event) {
@@ -319,7 +319,7 @@ function handleClick2(event){
   myForm1.opacityNoMatch.value = 0;
   dropDown4.property( "value", "Select" );
   dropDown.property( "value", "Select" );
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, "", "", "");
   return false;
 }
 
@@ -329,7 +329,7 @@ function handleClick2(event){
 function handleClick3(event) {
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
 }
 
 // it will be executed when (?? draw and) zoom button is pressed and the plot will zoomed out according to the points obtained by mouse click event
@@ -341,7 +341,7 @@ function handleClick4(){
     val_opacityMatch = document.getElementById("opacityMatch").value;
     val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
     needZoom = true;
-    highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+    highlighting(dicts, dataset, categories, shaping_column, columns, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, val_opacityMatch, val_opacityNoMatch);
   }
 
 
