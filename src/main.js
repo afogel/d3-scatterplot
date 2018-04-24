@@ -157,7 +157,6 @@ var categories_copy_color = [];
 categories_copy_color.push(color_column);
 
 var columns = [], temp = [];
-var x_max, x_min, y_max, y_min;
 
 // column for the transparent value
 var transparent_column = "Select", feature_column = "", shaping_column = "Select";
@@ -246,9 +245,9 @@ dropDown3.on("change", plotting4);
 dropDown4.on("change", plotting5);
 
 if ("q" in dicts) {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, dicts["q"], "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, dicts["q"], "", "");
 } else {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
 }
 
 // the functions to call when the value of dropdown menu is changes
@@ -274,7 +273,7 @@ function plotting(){
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // function to call for change event
@@ -286,7 +285,7 @@ function plotting5(){
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 var zoomed = 0;
@@ -301,7 +300,7 @@ function handleClick(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck(event) {
@@ -318,7 +317,7 @@ function handleClick1(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck1(event) {
@@ -338,7 +337,7 @@ function handleClick2(event){
   myForm1.opacityNoMatch.value = 0;
   dropDown4.property( "value", "Select" );
   dropDown.property( "value", "Select" );
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
   return false;
 }
 
@@ -350,7 +349,7 @@ function handleClick3(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // it will be executed when (?? draw and) zoom button is pressed and the plot will zoomed out according to the points obtained by mouse click event
@@ -363,7 +362,7 @@ function handleClick4(){
     val_opacityMatch = document.getElementById("opacityMatch").value;
     val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
     needZoom = true;
-    highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+    highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   }
 
 

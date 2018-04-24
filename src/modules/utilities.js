@@ -13,7 +13,7 @@ export const plotClearer = {
   }
 };
 
-// AJF: Curious to figure out what is arri
+// AJF: Curious to figure out what is `arri`. Can we rename?
 // used to search a particular substring in the list of requested feature column
 // used to determine whether we should add find to arri, hence the t/f -> f/t
 

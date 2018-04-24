@@ -15,9 +15,8 @@ import { plotClearer,
        } from './utilities.js';
 
 // function for plotting
-export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, x_max, x_min, y_max, y_min, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch) {
-
-  var svg;
+export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch) {
+  var x_max, x_min, y_max, y_min, svg;
   var temp1 = [], temp2 = [], temp3 = [];
   var dict1 = {};
 
