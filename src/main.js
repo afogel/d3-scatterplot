@@ -1,6 +1,6 @@
 import { margin, width, height, plotClearer, searchdic } from './modules/utilities.js';
 import { classify, benchmark, tabulate } from './modules/table_creator.js';
-import { lassoStart } from './modules/lasso.js'
+import { lassoStart, lassoDraw } from './modules/lasso.js'
 
 console.log(margin, width, height)
 // This step is performed to parse the url to identify the dataset and the default coloring column
@@ -441,21 +441,6 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
     .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-    /* https://github.com/skokenes/D3-Lasso-Plugin
-    plugin also handles selected and possible settings */
-    // Lasso starts
-
-    var lasso_draw = function() {
-        // Style the possible dots
-        lasso.items().filter(function(d) {return d.possible===true})
-        .classed({"not_possible":false,"possible":true});
-
-        // Style the not possible dot
-        lasso.items().filter(function(d) {return d.possible===false})
-        .classed({"not_possible":true,"possible":false})
-        .style("stroke", "#000");
-      };
-
       var lasso_end = function() {
         // Reset the color of all dots
         lasso.items()
@@ -532,7 +517,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
         .area(lasso_area) // area where the lasso can be started
         
     lasso.on("start",lassoStart) // lasso start function
-         .on("draw",lasso_draw) // lasso draw function
+         .on("draw",lassoDraw) // lasso draw function
          .on("end",lasso_end); // lasso end function
 
     // Init the lasso object on the svg:g that contains the dots
