@@ -1,4 +1,4 @@
-import { width, height } from './modules/constants.js';
+import { width, height, d3_category20_shuffled } from './modules/constants.js';
 import { highlighting } from './modules/highlighting.js';
 
 // This step is performed to parse the url to identify the dataset and the default coloring column
@@ -105,12 +105,6 @@ var print_array = function(arr, d) {
 
 // setup fill color
 var color_column;
-
-// Can generate more with http://jnnnnn.github.io/category-colors-2L-inplace.html if want more
-var d3_category20_shuffled = [
-"#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf",
-"#aec7e8", "#ffbb78", "#98df8a", "#ff9896", "#c5b0d5", "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d", "#9edae5"
-];
 
 // coloring will be done according to the values determined by cValue
 var cValue = function(d) {return d[color_column];},
@@ -261,9 +255,9 @@ dropDown3.on("change", plotting4);
 dropDown4.on("change", plotting5);
 
 if ("q" in dicts) {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, dicts["q"], "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, dicts["q"], "", "");
 } else {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, "", "", "");
 }
 
 // the functions to call when the value of dropdown menu is changes
@@ -289,7 +283,7 @@ function plotting(){
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // function to call for change event
@@ -301,7 +295,7 @@ function plotting5(){
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 var zoomed = 0;
@@ -316,7 +310,7 @@ function handleClick(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck(event) {
@@ -333,7 +327,7 @@ function handleClick1(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck1(event) {
@@ -353,7 +347,7 @@ function handleClick2(event){
   myForm1.opacityNoMatch.value = 0;
   dropDown4.property( "value", "Select" );
   dropDown.property( "value", "Select" );
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, "", "", "");
   return false;
 }
 
@@ -365,7 +359,7 @@ function handleClick3(event) {
   val_transp = document.getElementById("transpText").value;
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
 }
 
 // it will be executed when (?? draw and) zoom button is pressed and the plot will zoomed out according to the points obtained by mouse click event
@@ -378,7 +372,7 @@ function handleClick4(){
     val_opacityMatch = document.getElementById("opacityMatch").value;
     val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
     needZoom = true;
-    highlighting(dataset, categories, shaping_column, category_search, color_column, d3_category20_shuffled, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
+    highlighting(dataset, categories, shaping_column, category_search, color_column, color, getParameterByName, zoomed, needZoom, xValue, x_max, x_min, yValue, y_max, y_min, xScale, yScale, xAxis, yAxis, transparent_column, xMap, yMap, cValue, val_search, val_transp, val_opacityMatch, val_opacityNoMatch);
   }
 
 
