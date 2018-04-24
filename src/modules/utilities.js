@@ -23,3 +23,20 @@ export function searchdic(arri, find) {
   }
   return true;
 }
+
+// Checks the url query for name=value and extracts the value
+// *************************************************************
+// TODO: This can likely be accomplished using newer browser APIS, e.g.:
+// let queryParams = (new URL(location)).searchParams;
+// let dataset = queryParams.get("dataset") || "joined_data.csv";
+export function getParameterByName(name, url) {
+  if (!url) {
+    url = window.location.href;
+  }
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+  results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
