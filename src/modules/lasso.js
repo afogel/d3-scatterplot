@@ -1,4 +1,4 @@
-import { width, height, plotClearer, tabulate, searchdic } from './utilities.js';
+import { plotClearer, searchdic } from './utilities.js';
 
 /* https://github.com/skokenes/D3-Lasso-Plugin
   plugin also handles selected and possible settings */

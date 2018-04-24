@@ -1,4 +1,5 @@
-import { margin, width, height, plotClearer, searchdic } from './utilities.js';
+import { margin, width, height } from './constants.js';
+import { plotClearer, searchdic } from './utilities.js';
 import { classify, benchmark, tabulate } from './table_creator.js';
 import { lassoStart, lassoDraw } from './lasso.js'
 

@@ -1,4 +1,4 @@
-import { width, height } from './modules/utilities.js';
+import { width, height } from './modules/constants.js';
 import { highlighting } from './modules/highlighting.js';
 
 // This step is performed to parse the url to identify the dataset and the default coloring column
