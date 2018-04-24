@@ -43,6 +43,17 @@ export function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+// to print all the key values pairs of a point (used to display the summary on the webpage)
+export function printArray(arr, d) {
+  var x = "";
+  for (var i=0; i<arr.length; i++) {
+    x = x + "<b>" + arr[i] + "</b>: " + d[arr[i]] + "<br>"
+  }
+  x = x + d.x + "<br>" + d["y"];
+  return x;
+};
+
+// NOTE: I might want to move these axes functions to an axis module
 // The following two functions are getter methods:
 // value accessor - returns the value to encode for a given data object.
 // Type Signature: data Object -> value

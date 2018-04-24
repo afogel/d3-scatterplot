@@ -1,9 +1,11 @@
 import { margin, width, height, d3_category20_shuffled } from './constants.js';
 import { classify, benchmark, tabulate } from './table_creator.js';
+import { tooltip, tooltip1 } from './tooltips.js'
 // import { lassoStart, lassoDraw } from './lasso.js'
 import { plotClearer, 
          searchdic, 
          getParameterByName,
+         printArray,
          xValue,
          yValue,
          xScale,
@@ -15,8 +17,10 @@ import { plotClearer,
        } from './utilities.js';
 
 // function for plotting
-export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch) {
+export function highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch) {
   let x_max, x_min, y_max, y_min, svg;
+  let coordinatesx = [];
+  let coordinatesy = [];
   let temp1 = [], temp2 = [], temp3 = [];
   let dict1 = {};
 
@@ -72,8 +76,8 @@ export function highlighting(dataset, categories, shaping_column, category_searc
 
       // get values for table -> array inside a list
       var zsx = lasso.items().filter(function(d) {return d.selected===true});
-      x_values = [];
-      y_values = [];
+    let x_values = [];
+    let y_values = [];
       // adjust the x and y values
       for (var i=0; i<zsx[0].length; i++) {
         x_values.push(((((zsx[0][i].getBBox().x+6.5) * (x_max - x_min))/width + x_min )));
@@ -389,7 +393,7 @@ export function highlighting(dataset, categories, shaping_column, category_searc
           .duration(200)
           .style("opacity", 1);
           tooltip.html(
-            print_array(category_search_data, d))
+            printArray(category_search_data, d))
           .style("left", 60 + "px")
           .style("top", 30 + "px");
         })
@@ -423,7 +427,7 @@ export function highlighting(dataset, categories, shaping_column, category_searc
           .duration(200)
           .style("opacity", 1);
           tooltip.html(
-            print_array(category_search_data, d))
+            printArray(category_search_data, d))
           .style("left", 60 + "px")
           .style("top", 30 + "px");
         })
@@ -462,7 +466,7 @@ export function highlighting(dataset, categories, shaping_column, category_searc
           tooltip.transition()
           .duration(200)
           .style("opacity", 1);
-          tooltip.html(print_array(category_search_data, d))
+          tooltip.html(printArray(category_search_data, d))
           .style("left", 60 + "px")
           .style("top", 30 + "px");
         })
@@ -515,7 +519,7 @@ export function highlighting(dataset, categories, shaping_column, category_searc
             .duration(200)
             .style("opacity", 1);
             tooltip.html(
-              print_array(category_search_data, d))
+              printArray(category_search_data, d))
             .style("left", 60 + "px")
             .style("top", 30 + "px");
           })

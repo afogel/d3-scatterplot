@@ -84,16 +84,6 @@ var tooltip1 = d3.select("body").append("div")
 .attr("class", "tooltip1")
 .style("opacity", 0);
 
-// to print all the key values pairs of a point (used to display the summary on the webpage)
-var print_array = function(arr, d) {
-  var x = "";
-  for (var i=0; i<arr.length; i++) {
-    x = x + "<b>" + arr[i] + "</b>: " + d[arr[i]] + "<br>"
-  }
-  x = x + d.x + "<br>" + d["y"];
-  return x;
-};
-
 // setup fill color
 var color_column;
 
@@ -245,9 +235,9 @@ dropDown3.on("change", plotting4);
 dropDown4.on("change", plotting5);
 
 if ("q" in dicts) {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, dicts["q"], "", "");
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, dicts["q"], "", "");
 } else {
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
 }
 
 // the functions to call when the value of dropdown menu is changes
@@ -271,7 +261,7 @@ function plotting(){
   cValue = function(d) { return d[color_column];};
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
 }
 
 // function to call for change event
@@ -281,7 +271,7 @@ function plotting5(){
   cValue = function(d) { return d[color_column];};
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
 }
 
 var zoomed = 0;
@@ -294,7 +284,7 @@ function handleClick(event) {
   console.log(document.getElementById("searchText").value);
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck(event) {
@@ -309,7 +299,7 @@ function handleClick1(event) {
   console.log(document.getElementById("transpText").value);
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
   return false;
 }
 function handleCheck1(event) {
@@ -329,7 +319,7 @@ function handleClick2(event){
   myForm1.opacityNoMatch.value = 0;
   dropDown4.property( "value", "Select" );
   dropDown.property( "value", "Select" );
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, "", "", "");
   return false;
 }
 
@@ -339,7 +329,7 @@ function handleClick2(event){
 function handleClick3(event) {
   val_opacityMatch = document.getElementById("opacityMatch").value;
   val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
-  highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+  highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
 }
 
 // it will be executed when (?? draw and) zoom button is pressed and the plot will zoomed out according to the points obtained by mouse click event
@@ -351,7 +341,7 @@ function handleClick4(){
     val_opacityMatch = document.getElementById("opacityMatch").value;
     val_opacityNoMatch = document.getElementById("opacityNoMatch").value;
     needZoom = true;
-    highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
+    highlighting(dataset, categories, shaping_column, category_search, category_search_data, feature_column, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch);
   }
 
 
@@ -368,9 +358,6 @@ function linspace(start, end, n) {
   out.push(end);
   return out;
 }
-
-let coordinatesx = [];
-let coordinatesy = [];
 
 // provides different colored spectrum
 var scale_d = {
