@@ -15,12 +15,13 @@ import { plotClearer,
        } from './utilities.js';
 
 // function for plotting
-export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_transp, val_opacityMatch, val_opacityNoMatch) {
+export function highlighting(dataset, categories, shaping_column, category_search, color_column, color, zoomed, needZoom, transparent_column, cValue, val_opacityMatch, val_opacityNoMatch) {
   let x_max, x_min, y_max, y_min, svg;
   let temp1 = [], temp2 = [], temp3 = [];
   let dict1 = {};
 
   let val_search = document.getElementById("searchText").value;
+  let val_transp = document.getElementById("transpText").value;
 
   // to remove the existing svg plot if any and clear side table
   plotClearer.clearAll();
