@@ -11,3 +11,16 @@
 export const margin = { top: 90, right: 40, bottom: 40, left: 40 };
 export const width = 700 - margin.left - margin.right;
 export const height = 750 - margin.top - margin.bottom;
+
+export const plotClearer = {
+  clearTable: () => {
+    document.getElementById("demo3").innerHTML = "";
+    d3.select("table").remove();
+  },
+  clearAll: () => {
+    plotClearer.clearTable();
+    document.getElementById("predicted_words").innerHTML = "";
+    document.getElementById("frequent_words").innerHTML = "";
+    d3.select("svg").remove();
+  }
+};

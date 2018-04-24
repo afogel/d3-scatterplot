@@ -1,5 +1,5 @@
-import { margin, width, height } from './modules/utilities.js';
-import { classify, benchmark, tabulate } from './modules/table_creator.js'
+import { margin, width, height, plotClearer } from './modules/utilities.js';
+import { classify, benchmark, tabulate } from './modules/table_creator.js';
 
 console.log(margin, width, height)
 // This step is performed to parse the url to identify the dataset and the default coloring column
@@ -439,11 +439,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
   var dict1 = {};
 
     // to remove the existing svg plot if any and clear side table
-    document.getElementById("demo3").innerHTML = "";
-    document.getElementById("predicted_words").innerHTML = "";
-    document.getElementById("frequent_words").innerHTML = "";
-    d3.select("svg").remove();
-    d3.select("table").remove();
+    plotClearer.clearAll();
 
     // function zoom() {
     //  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -452,7 +448,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
     // the location of svg image will be determined
     svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("heigh.t", height + margin.top + margin.bottom)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
@@ -460,8 +456,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
     plugin also handles selected and possible settings */
     // Lasso starts
     var lasso_start = function() {
-      d3.select("table").remove();
-      document.getElementById("demo3").innerHTML = "";
+      plotClearer.clearTable();
       lasso.items()
             .attr("r",3.5) // reset size
             .style("fill",null) // clear all of the fills (greys out)
@@ -544,7 +539,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
     // Create the area where the lasso event can be triggered
     var lasso_area = svg.append("rect")
     .attr("width",width)
-    .attr("heigh.t",height)
+    .attr("height",height)
     .style("opacity",0);
 
     // Define the lasso
@@ -1045,7 +1040,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
                     .attr('x1', 0)
                     .attr('y1', 0)
                     .attr('width', 18)
-                    .attr('heigh.t', 150)
+                    .attr('height', 150)
                     .attr("transform", "translate(" + 582 + ", 0)")
                     .style('fill', 'url(#gradient)');
 
@@ -1085,7 +1080,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
                     .attr("d", d3.svg.symbol().type(function(d) {return symbols[symbol[d]%6];}))
                     .attr("x", width + 0)
                     .attr("width", 18)
-                    .attr("heigh.t", 18)
+                    .attr("height", 18)
                     // .attr("transform", function(d, i) { return "translate(" + 20 + "," + i*20 + ")"; });
                     .attr("transform", function(d, i) { return "translate(" + 20 + "," + i*20 + ") rotate(" + sizes[parseInt(symbol[d]%6)][parseInt(symbol[d]/6)%4] + ")"; });
                 // draw legend text
@@ -1111,7 +1106,7 @@ function highlighting(val_search, val_transp, val_opacityMatch, val_opacityNoMat
                 legend.append("rect")
                 .attr("x", width + 6)
                 .attr("width", 18)
-                .attr("heigh.t", 18)
+                .attr("height", 18)
                 .style("fill", color);
 
                 // draw legend text
